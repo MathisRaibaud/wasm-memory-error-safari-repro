@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WASM OUT-OF-MEMORY SAFARI TEST</title>
+</head>
+<body>
+Open Safari console and reload the page multiple times. You should get a "RangeError: Out of memory" after a certain number of reloads.
+<script type="text/javascript">
+    var Module = {
+      onRuntimeInitialized: function() {
+        var foo = new Module.Foo(); 
+	      foo.SayHello();
+      }
+    };
+</script>
+<script type="text/javascript" src="foo.js"></script>
+</script>
+</body>
+</html>
