@@ -9,6 +9,7 @@
 - The problem seems to occur only if the memory is shared (`pthread` enabled)
 - The error seems to be related to the `MAXIMUM_MEMORY` value (or to the `INITIAL_MEMORY` value if `ALLOW_MEMORY_GROWTH` is disabled).
 - The memory seems to be never deallocated when the page is reloaded and therefore creates an out-of-memory after several reloads.
+- The problem seems to be related to the auto-generated Emscripten script (and not Safari), as it does not occur when shared memory is allocated manually (see [Preliminary investigations](#preliminary-investigations)).
 
 
 ## How to reproduce
@@ -61,7 +62,7 @@ Target: wasm32-unknown-emscripten
 Thread model: posix
 ```
 
-## Preliminary investigations
+## <a id="preliminary-investigations"></a> Preliminary investigations
 
 I first encountered this problem only on iOS at first. At that time, I only had the `ALLOW_MEMORY_GROWTH` and `pthread` options enabled (the `INITIAL_MEMORY` and `MAXIMUM_MEMORY` values were set by default by Emscripten). The page crashed on its first access (no need to reload the page to get the error).
 
